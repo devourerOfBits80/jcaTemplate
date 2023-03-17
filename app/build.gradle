@@ -1,0 +1,65 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'checkstyle'
+    id 'io.freefair.lombok' version '6.6.3'
+}
+
+ext {
+    lombokVersion = '1.18.26'
+    guavaVersion = '31.1-jre'
+    log4jVersion = '2.20.0'
+    junitJupiterVersion = '5.9.2'
+    mockitoJunitJupiterVersion = '5.1.1'
+    assertJVersion = '3.24.2'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+group = 'org.devourerofbits80.jcatemplate'
+version = '1.0.0'
+sourceCompatibility = '17'
+
+dependencies {
+    // Main dependencies.
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    implementation group: 'com.google.guava', name: 'guava', version: "${guavaVersion}"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4jVersion}"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4jVersion}"
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j2-impl', version: "${log4jVersion}"
+
+    // Test dependencies.
+    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: "${junitJupiterVersion}"
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: "${mockitoJunitJupiterVersion}"
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: "${assertJVersion}"
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'org.devourerofbits80.jcatemplate.App'
+}
+
+checkstyle {
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    source = 'src/test/java'
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
