@@ -15,8 +15,8 @@ required plugins and useful dependencies have been included.
 
 - **Guava** *(31.1-jre)*
 - **Log4j** *(2.20.0)*, including **SLF4J** implementation support
-- **JUnit Jupiter** *(5.9.2)*
-- **mockito** *(5.1.1)*
+- **JUnit Jupiter** *(5.9.3)*
+- **mockito** *(5.3.1)*
 - **AssertJ** *(3.24.2)*
 
 ## Usage
